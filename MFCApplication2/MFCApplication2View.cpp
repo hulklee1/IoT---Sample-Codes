@@ -17,7 +17,7 @@
 #define new DEBUG_NEW
 #endif
 
-
+int DrawStart = 0;
 // CMFCApplication2View
 
 IMPLEMENT_DYNCREATE(CMFCApplication2View, CView)
@@ -29,6 +29,10 @@ BEGIN_MESSAGE_MAP(CMFCApplication2View, CView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CMFCApplication2View::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_COMMAND(ID_DRAW, &CMFCApplication2View::OnMouseDraw)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CMFCApplication2View 생성/소멸
@@ -59,7 +63,6 @@ void CMFCApplication2View::OnDraw(CDC* /*pDC*/)
 	ASSERT_VALID(pDoc);
 	if (!pDoc)
 		return;
-
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 }
 
@@ -126,3 +129,43 @@ CMFCApplication2Doc* CMFCApplication2View::GetDocument() const // 디버그되�
 
 
 // CMFCApplication2View 메시지 처리기
+
+int InDrawing = 0;
+CPoint LastP;
+CDC *PDC = NULL;
+
+void CMFCApplication2View::OnMouseDraw()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	DrawStart = !DrawStart;
+}
+
+
+void CMFCApplication2View::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	InDrawing = DrawStart; LastP = point;
+	CView::OnLButtonDown(nFlags, point);
+}
+
+
+void CMFCApplication2View::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	InDrawing = 0;
+	CView::OnLButtonUp(nFlags, point);
+}
+
+
+void CMFCApplication2View::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if (InDrawing)
+	{
+		PDC = GetDC();
+		PDC->MoveTo(LastP);
+		PDC->LineTo(point);
+		LastP = point;
+	}
+	CView::OnMouseMove(nFlags, point);
+}
