@@ -51,7 +51,7 @@ CMainFrame::~CMainFrame()
 {
 }
 
-int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
+int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) 
 {
 	if (CFrameWndEx::OnCreate(lpCreateStruct) == -1)
 		return -1;

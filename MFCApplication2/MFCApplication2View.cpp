@@ -11,7 +11,7 @@
 #endif
 
 #include "MFCApplication2Doc.h"
-#include "MFCApplication2View.h"
+#include "MFCApplication2View.h" 
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

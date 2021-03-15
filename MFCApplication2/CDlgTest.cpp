@@ -14,7 +14,6 @@ IMPLEMENT_DYNAMIC(CDlgTest, CDialogEx)
 
 CDlgTest::CDlgTest(CWnd* pParent /*=nullptr*/)	: CDialogEx(IDD_DLG_TEST, pParent)
 {
-
 }
 
 CDlgTest::~CDlgTest()
