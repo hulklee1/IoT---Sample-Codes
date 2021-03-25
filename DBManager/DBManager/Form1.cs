@@ -73,14 +73,43 @@ namespace DBManager
                 sbPanel1.Text = openFileDialog1.SafeFileName;
                 sbPanel2.Text = "Database opened success.";
                 sbPanel1.BackColor = Color.Green;
+
+                DataTable dt = sqlCon.GetSchema("Tables");
+                for(int i=0;i<dt.Rows.Count;i++)
+                {
+                    string s = dt.Rows[i].ItemArray[2].ToString();
+                    sbButton1.DropDownItems.Add(s);
+                }
+
+                //string sample = "column1,column2";
+                //string[] sa = sample.Split(',');
+                //string buf = "";
+
+                //foreach (string col in sa)
+                //{
+                //    //buf += string.Format("{0," + 30 + "}", col);
+                //    buf += $"{col,30}";
+                //}
+                //sbPanel2.Text = buf;
             }
-            catch(SqlException e1)
+            catch (SqlException e1)
             {
                 MessageBox.Show(e1.Message);
                 sbPanel2.Text = "Database cannnot open.";
                 sbPanel2.BackColor = Color.Red;
             }
         }
+
+        private void mnuDBClose_Click(object sender, EventArgs e)
+        {
+            sqlCon.Close();
+            sbPanel1.Text = "DB File Name";
+            sbPanel1.BackColor = Color.Gray;
+            sbPanel2.Text = "Database Closed.";
+
+            sbButton1.DropDownItems.Clear();
+        }
+
         public string GetToken(int index, char deli, string str)
         {
             string[] Strs = str.Split(deli);
@@ -92,7 +121,7 @@ namespace DBManager
         int RunSql(string s1)
         {
             try
-            {   // ex)  select * from fStatus
+            {   // ex)  select * from fStatus : select id,fname,fdesc from ____
                 string sql = s1.Trim();
                 sqlCmd.CommandText = sql;   // insert into fstatus values ( 1,2,3,4)
                 if (GetToken(0, ' ', sql).ToUpper() == "SELECT")
@@ -100,6 +129,7 @@ namespace DBManager
                     SqlDataReader sr = sqlCmd.ExecuteReader();
 
                     TableName = GetToken(3, ' ', sql);
+//                    sbPanel3.Text = TableName;
                     dataGrid.Rows.Clear();
                     dataGrid.Columns.Clear();
 
@@ -166,6 +196,7 @@ namespace DBManager
 
         private void tbSql_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!mnuEnterKey.Checked) return;
             if (e.KeyCode != Keys.Enter) return;
 
             string str = tbSql.Text;
@@ -193,13 +224,86 @@ namespace DBManager
                     {
                         string tn = TableName;
                         string fn = dataGrid.Columns[j].HeaderText;
-                        string ct = (string)dataGrid.Rows[i].Cells[j].Value;
+                        object ct = dataGrid.Rows[i].Cells[j].Value;
                         string kn = dataGrid.Columns[0].HeaderText;
-                        int kt = (int)dataGrid.Rows[i].Cells[0].Value;
+                        object kt = dataGrid.Rows[i].Cells[0].Value;
                         string sql = $"update {tn} set {fn}={ct} where {kn}={kt}";
                         RunSql(sql);
                     }
                 }
+            }
+        }
+
+        private void sbPanel3_Click(object sender, EventArgs e)
+        {
+ //           string sql = $"select * from {sbPanel3.Text}";
+//            RunSql(sql);
+
+        }
+
+        private void sbButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            string s = e.ClickedItem.Text; // 사용할 테이블 명 
+            string sql = $"select * from {s}";
+            sbButton1.Text = s;
+            RunSql(sql);
+        }
+
+        private void mnuAddRow_Click(object sender, EventArgs e)
+        {
+            dataGrid.Rows.Add();
+        }
+
+        private void mnuAddColumn_Click(object sender, EventArgs e)
+        {
+            frmInput dlg = new frmInput("Input Column Name");
+            DialogResult ret = dlg.ShowDialog();
+            if(ret == DialogResult.OK)
+            {
+                string s = dlg.sInput;
+                dataGrid.Columns.Add(s, s);
+            }
+        }
+
+        private void mnuEnterKey_Click(object sender, EventArgs e)
+        {
+            mnuEnterKey.Checked = !mnuEnterKey.Checked;
+        }
+
+        // Create table [TableName] (
+        // [column1] nchar(20),
+        // [column2] nchar(20),
+        // [column3] nchar(20),
+        //    ...
+        // )
+        private void mnuNewTable_Click(object sender, EventArgs e)
+        {
+            frmInput dlg = new frmInput("신규 테이블 명");
+            if(dlg.ShowDialog() != DialogResult.OK) return;
+            string tableName = dlg.sInput;
+
+            string sql = $"Create table {tableName} ( ";
+            for(int i=0;i<dataGrid.ColumnCount;i++)
+            {
+                sql += $"{dataGrid.Columns[i].HeaderText} nchar(20)";
+                if (i < dataGrid.ColumnCount - 1) sql += ", ";
+            }
+            sql += ")";
+            RunSql(sql);    // 신규 테이블 생성 완료
+
+            //  insert into [TableName] values (
+            //  [col_val_1], [col_val_2], ...
+            // )
+            for(int i=0;i<dataGrid.RowCount;i++)
+            {
+                sql = $"insert into {tableName} values (";
+                for(int j=0;j<dataGrid.Columns.Count;j++)
+                {
+                    sql += $"'{dataGrid.Rows[i].Cells[j].Value}'";
+                    if (j < dataGrid.ColumnCount - 1) sql += ", ";
+                }
+                sql += ")";
+                RunSql(sql);
             }
         }
     }
