@@ -22,7 +22,7 @@ namespace DBManagerEx
         SqlCommand sqlCom = new SqlCommand();
         private void mnuNew_Click(object sender, EventArgs e)
         {
-            dataGrid.Rows.Clear();
+            dataGrid.Rows.Clear(); 
             dataGrid.Columns.Clear();
 
             sbPanel1.Text = "DB File Name";
