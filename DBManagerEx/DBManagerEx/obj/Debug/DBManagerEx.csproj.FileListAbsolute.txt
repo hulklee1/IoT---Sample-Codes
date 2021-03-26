@@ -1,0 +1,10 @@
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\bin\Debug\DBManagerEx.exe.config
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\bin\Debug\DBManagerEx.exe
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\bin\Debug\DBManagerEx.pdb
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.csprojAssemblyReference.cache
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.Form1.resources
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.Properties.Resources.resources
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.csproj.GenerateResource.cache
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.csproj.CoreCompileInputs.cache
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.exe
+C:\Users\KOSTA\source\repos\IoT216\DBManagerEx\DBManagerEx\obj\Debug\DBManagerEx.pdb
