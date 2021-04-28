@@ -1,0 +1,14 @@
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\bin\Debug\jsLibrary1.dll
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\bin\Debug\jsLibrary1.pdb
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\obj\Debug\jsLibrary.frmInput.resources
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\obj\Debug\jsLibrary.csproj.GenerateResource.cache
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\obj\Debug\jsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\obj\Debug\jsLibrary1.dll
+C:\Users\HulkL\source\repos\jsLibrary1\jsLibrary1\obj\Debug\jsLibrary1.pdb
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\obj\Debug\jsLibrary.frmInput.resources
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\obj\Debug\jsLibrary.csproj.GenerateResource.cache
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\obj\Debug\jsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\bin\Debug\jsLibrary.dll
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\bin\Debug\jsLibrary.pdb
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\obj\Debug\jsLibrary.dll
+C:\Users\HulkL\source\repos\jsLibrary\jsLibrary\obj\Debug\jsLibrary.pdb
